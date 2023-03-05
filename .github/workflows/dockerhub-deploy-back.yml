@@ -3,11 +3,14 @@ name: Docker Image CI Back-End
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - 'back/**'
   pull_request:
     branches: [ "main" ]
-
+    paths:
+      - 'back/**'
+      
   workflow_dispatch:
-    
     
 jobs:
   build:
