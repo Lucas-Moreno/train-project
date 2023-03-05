@@ -16,9 +16,6 @@ jobs:
     env:
       TAG_DOCKER: $(curl -s https://registry.hub.docker.com/v2/repositories/lucasmoreno82/back-nodejs/tags/?page_size=1 | jq -r '.results[].name')
 
-    inputs:
-      deploy_back_key: default_value
-
     steps:
 
       - uses: actions/checkout@v3
