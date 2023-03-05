@@ -33,7 +33,7 @@ jobs:
 
       - name: docker build
         run: |
-          cd back 
+          cd front 
           docker build . --tag lucasmoreno82/front-reactjs:${{ steps.increment_tag.outputs.incremented-tag }}
           
       - name: docker tag
