@@ -1,9 +1,10 @@
-import express, { Request, Response, Router } from "express"
+import express, { Request } from "express"
 import mongoose from 'mongoose'
 import { MongooseModuleOptions } from '@nestjs/mongoose'
 import { authMiddleware } from '../middleware/auth.middleware'
 import { signup, signin, logout } from "../controllers/auth.controller"
 import { getInfoUser } from '../controllers/user.controller'
+import { Router, Response } from '../types/types'
 
 const router: Router = express.Router()
 

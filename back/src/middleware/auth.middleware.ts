@@ -1,9 +1,9 @@
 import jwt, { Secret } from 'jsonwebtoken';
 import mongoose from 'mongoose';
 import process from 'process';
-import { Request, Response, NextFunction } from 'express';
+import { NextFunction } from 'express';
 import UserModel from '../models/user.models';
-
+import { Request, Response } from '../types/types'
 interface JwtPayload {
   id: string;
 }
@@ -11,9 +11,13 @@ interface JwtPayload {
 export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   try {
 
-    const token = req.cookies.jwt;
+    let token: string = ''
 
-    if (!token) {
+    if (req.cookies) {
+      token = req.cookies.jwt;
+    }
+
+    if (token === '') {
       return res.status(401).json({ message: 'Unauthorized' });
     }
 

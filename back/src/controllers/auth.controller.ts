@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import jwt, { Secret } from 'jsonwebtoken';
 import process from 'process'
-import { Request, Response } from 'express'
+import { Request, Response } from '../types/types'
 import UserModel from '../models/user.models'
 import bcrypt from 'bcryptjs'
 

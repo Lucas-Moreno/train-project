@@ -5,13 +5,13 @@ import router from "./src/routes/routes"
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import "./src/models/db"
-
+import { Express, Router } from './src/types/types'
 dotenv.config()
 
 const PORT = process.env.PORT_BACK
 
 
-const app = express()
+const app: Express = express()
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
