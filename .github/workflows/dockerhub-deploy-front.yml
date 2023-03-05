@@ -1,0 +1,43 @@
+name: Docker Image CI Front-End
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      TAG_DOCKER: $(curl -s https://registry.hub.docker.com/v2/repositories/lucasmoreno82/front-reactjs/tags/?page_size=1 | jq -r '.results[].name')
+
+    steps:
+
+      - uses: actions/checkout@v3
+      - name: docker login
+        env: 
+          DOCKER_USER: ${{secrets.DOCKER_USER}}
+          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+        run : |
+          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+
+      - name: Incrémenter le tag Docker
+        id: increment_tag
+        run: |
+          INCREMENT_TAG=$(echo ${{ env.TAG_DOCKER }} | awk -F. -v OFS=. '{$NF++; print}')
+          echo "::set-output name=incremented-tag::$INCREMENT_TAG"
+
+      - name: docker build
+        run: |
+          cd back 
+          docker build . --tag lucasmoreno82/front-reactjs:${{ steps.increment_tag.outputs.incremented-tag }}
+          
+      - name: docker tag
+        run: docker tag ${{secrets.DOCKER_USER}}/front-reactjs:${{ steps.increment_tag.outputs.incremented-tag }} ${{secrets.DOCKER_USER}}/front-reactjs:${{ steps.increment_tag.outputs.incremented-tag }}
+
+      - name: docker push
+        run: docker push ${{secrets.DOCKER_USER}}/front-reactjs:${{ steps.increment_tag.outputs.incremented-tag }}
