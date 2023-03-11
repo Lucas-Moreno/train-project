@@ -1,7 +1,7 @@
 #!/bin/bash
 
-rm back/.env.back.copy
-rm front/.env.front.copy
+rm -f ./back/.env.back.copy
+rm -f ./front/.env.front.copy
 
 # Exécute le script tag_docker.sh en arrière-plan
 source ./scripts/tag_docker.sh &

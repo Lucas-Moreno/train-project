@@ -3,12 +3,12 @@ services:
 
   frontend:
     extends:
-      file: frontend/docker-compose.yml
+      file: front/docker-compose.yml
       service: frontend
 
   backend:
     extends:
-      file: backend/docker-compose.yml
+      file: back/docker-compose.yml
       service: backend
 
   mongodb:
