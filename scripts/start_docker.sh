@@ -1,9 +1,10 @@
 #!/bin/bash
 
-rm .env.bak
+rm back/.env.back.copy
+rm front/.env.front.copy
 
 # Exécute le script tag_docker.sh en arrière-plan
-source ./script/tag_docker.sh &
+source ./scripts/tag_docker.sh &
 
 # Attend la fin de l'exécution du script tag_docker.sh
 wait $!

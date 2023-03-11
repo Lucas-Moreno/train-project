@@ -2,29 +2,19 @@ version: '3'
 services:
 
   frontend:
-    image: lucasmoreno82/front-reactjs:${TAG_DOCKER_FRONT}
-    ports:
-      - ${PORT_FRONT}:${PORT_FRONT}
-    env_file:
-      - .env
-    depends_on:
-      - backend
+    extends:
+      file: frontend/docker-compose.yml
+      service: frontend
 
   backend:
-    image: lucasmoreno82/back-nodejs:${TAG_DOCKER_BACK}
-    ports:
-      - ${PORT_BACK}:${PORT_BACK}
-    env_file:
-      - .env
-    depends_on:
-      - mongodb
+    extends:
+      file: backend/docker-compose.yml
+      service: backend
 
   mongodb:
-    image: mongo
-    env_file:
-      - .env
-    ports:
-      - "27017:27017"
+    extends:
+      file: mongodb/docker-compose.yml
+      service: mongodb
     volumes:
       - mongodb:/data/db
 

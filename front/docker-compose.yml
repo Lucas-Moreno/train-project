@@ -1,0 +1,11 @@
+version: '3'
+services:
+
+  frontend:
+    image: lucasmoreno82/front-reactjs:${TAG_DOCKER_FRONT}
+    ports:
+      - ${PORT_FRONT}:${PORT_FRONT}
+    env_file:
+      - .env.front
+    depends_on:
+      - backend

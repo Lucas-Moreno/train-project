@@ -6,10 +6,10 @@ import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import "./src/models/db"
 import { Express, Router } from './src/types/types'
+
 dotenv.config()
 
 const PORT = process.env.PORT_BACK
-
 
 const app: Express = express()
 
